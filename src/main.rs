@@ -30,26 +30,22 @@ fn main() {
     let mut uncontained = String::new();
     let mut contained = String::new();
 
-    let mut line_count = 1;
+    let mut line_count = 0;
 
     for line in file_lines {
-        let sorted_line: String; // New string holder to accomidate for case-insensitive
-        let sorted_search: String; // New string holder to accomidate for case-insensitive
-
         line_count += 1;
+        let contains_string: bool;
 
-        if flags.contains('i') {
-            sorted_line = line.to_lowercase();
-            sorted_search = search.to_lowercase();
+        if !flags.contains('i') {
+            contains_string = line.contains(search);
         } else {
-            sorted_line = String::from(line);
-            sorted_search = String::from(search);
+            contains_string = line.to_lowercase().contains(&search.to_lowercase());
         }
 
-        if !line.contains(&sorted_search) {
-            uncontained = format!("{}\n{}: {}", uncontained, line_count, sorted_line);
+        if !contains_string {
+            uncontained = format!("{}\n{}: {}", uncontained, line_count, line);
         } else {
-            contained = format!("{}\n{}: {}", contained, line_count, sorted_line);
+            contained = format!("{}\n{}: {}", contained, line_count, line);
         }
     }
     if flags.contains('u') {
