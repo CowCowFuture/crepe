@@ -31,7 +31,6 @@ fn main() {
     let mut contained = String::new();
 
     for line in file_lines {
-        line_count += 1;
         let contains_string: bool;
 
         if !flags.contains('i') {
