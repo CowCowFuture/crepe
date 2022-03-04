@@ -30,7 +30,7 @@ fn main() {
     let mut uncontained = String::new();
     let mut contained = String::new();
 
-    for line in file_lines {
+    for (line_number, line) in file_lines.enumerate() {
         let contains_string: bool;
 
         if !flags.contains('i') {
@@ -40,23 +40,15 @@ fn main() {
         }
 
         if !contains_string {
-            uncontained = format!("{}\n{}", uncontained, line);
+            uncontained = format!("{}\n{}: {}", uncontained, line_number, line);
         } else {
-            contained = format!("{}\n{}", contained, line);
+            contained = format!("{}\n{}: {}", contained, line_number, line);
         }
     }
 
     if flags.contains('u') {
-        for (line_number, line) in uncontained.split('\n').enumerate() {
-            if line_number != 0 {
-                println!("{}: {}", line_number, line);
-            }
-        }
+        println!("{}", uncontained);
     } else {
-        for (line_number, line) in contained.split('\n').enumerate() {
-            if line_number != 0 {
-                println!("{}: {}", line_number, line);
-            }
-        }
+        println!("{}", contained);
     }
 }
