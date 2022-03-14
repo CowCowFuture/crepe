@@ -15,6 +15,7 @@ fn main() {
             color::Fg(color::Red),
             color::Fg(color::Reset)
         );
+        eprintln!("Usage: crepe [SEARCH] [FILE]");
         exit(1);
     }
     if argc > 3 {
