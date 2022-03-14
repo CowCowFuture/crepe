@@ -15,6 +15,7 @@ fn main() {
             color::Fg(color::Red),
             color::Fg(color::Reset)
         );
+        eprintln!("Usage: crepe [SEARCH] [FILE]");
         exit(1);
     }
     if argc > 3 {
@@ -39,10 +40,12 @@ fn main() {
             contains_string = line.to_lowercase().contains(&search.to_lowercase());
         }
 
+        // add one because index starts at 0
+
         if !contains_string {
-            uncontained = format!("{}\n{}: {}", uncontained, line_number, line);
+            uncontained = format!("{}\n{}: {}", uncontained, line_number + 1, line);
         } else {
-            contained = format!("{}\n{}: {}", contained, line_number, line);
+            contained = format!("{}\n{}: {}", contained, line_number + 1, line);
         }
     }
 
